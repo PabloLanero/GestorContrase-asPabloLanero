@@ -1,0 +1,7 @@
+.table__categories{
+    margin:0px;
+}
+.div__principal{
+    display: inline-flex;
+    flex-direction: row;
+}
