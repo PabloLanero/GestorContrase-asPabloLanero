@@ -1,6 +1,9 @@
 async function getCategories() {
     let tableCategories = document.getElementsByClassName("table__categories")[0]
-    
+    tableCategories.innerHTML = `
+                <tr>
+                    <th>Categories</th>
+                </tr>`
     await fetch("http://localhost:3000/categories")
         .then(res => res.json())
         .then((res) => {
@@ -13,8 +16,12 @@ async function getCategories() {
                     let tableRow = document.createElement("tr")
                     let tableDataCategory = document.createElement("td")
                     tableDataCategory.innerText = element.name
+                    tableDataCategory.onclick = () => getSites(element.id) 
                     tableRow.appendChild(tableDataCategory)
-                    tableRow.onclick = () => getSites(element.id) 
+                    let tableDataAction = document.createElement("td")
+                    tableDataAction.innerText = "❌"
+                    tableDataAction.onclick = () => deleteCategory(element.id)
+                    tableRow.appendChild(tableDataAction)
                     tableCategories.appendChild(tableRow)
                     // console.log(element);
                 }
@@ -59,8 +66,10 @@ async function getSites(id) {
 })}
 
 async function postCategories(){
-    const objetoBody = { name: 'test_category_ejemplo' }
-   const res = await fetch('http://localhost:3000/categories', {
+    let categoria = document.getElementById("new__category")
+
+    const objetoBody = { name: categoria.value }
+    const res = await fetch('http://localhost:3000/categories', {
         method: 'POST',
         headers: {
             'Access-Control-Allow-Origin': '*',
@@ -71,20 +80,21 @@ async function postCategories(){
     })
     const data = await res.json()
     console.log(data);
-    
-    // .then(res => res.json())
-    // .then(data => console.log(data))
-    
-     
-    // console.log(content)
 
-
-
-    // await getCategories()
-        
+    await getCategories()
 }
 
-// postCategories()
+async function deleteCategory(id) {
+    const res = await fetch('http://localhost:3000/categories/'+id, {
+        method: 'DELETE',
+        headers: {
+            'Access-Control-Allow-Origin': '*',
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+    }})
+    await getCategories()
+}
+
 getCategories()
 getSites(1)
 
@@ -103,4 +113,4 @@ getSites(1)
     fetch("http://localhost:3000/categories")
       .then(res => res.json())
       .then(data => drawData(data))
-      */
+*/

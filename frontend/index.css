@@ -1,6 +1,9 @@
 .table__categories{
     margin:0px;
 }
+.table__categories tr td:hover{
+    cursor: pointer;
+}
 .div__principal{
     display: inline-flex;
     flex-direction: row;
