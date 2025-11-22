@@ -22,10 +22,7 @@
         <button onclick="postCategories()" >Add categories</button>
         <input type="text" id="new__category" placeholder="New category"/>
         <br/>
-        <button>Add site</button> 
-        <input type="text" id="nombre" placeholder="Nombre"/>
-        <input type="text" id="usuario" placeholder="Usuario"/>
-        <input type="text" id="password" placeholder="password"/>
+        <a href="./addSite.html" id="addSite"><button>Add site</button></a>
     </div>
     <div class="div__principal">
         <div>
@@ -50,22 +47,6 @@
         </div>
     </div>
   </main>
-  <script>
-    /*
-    let drawData = (data) => {
-      data.forEach(category => {
-        let parent = document.getElementsByTagName('ul')[0]
-        let child = document.createElement('li')
-        // child.innerText = JSON.stringify(category)
-        child.innerText = category.name
-        parent.appendChild(child)
-      })
-    }
-
-    fetch("http://localhost:3000/categories")
-      .then(res => res.json())
-      .then(data => drawData(data))
-      */
-  </script>
+  
 </body>
 </html>
