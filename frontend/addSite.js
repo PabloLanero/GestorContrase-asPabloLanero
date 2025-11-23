@@ -1,3 +1,5 @@
+
+
 async function addSite(){
 
     let idCategoria = new URLSearchParams(window.location.search).get("category");
@@ -28,6 +30,32 @@ async function addSite(){
     })
     
     
+}
+
+
+function CreatePassword(){
+    let passwordField = document.getElementById("password")
+    passwordField.value = ""
+    for (let i = 0; i < 9; i++) {
+        let charValue = 0
+        do {
+            charValue = Math.random()*126
+        } while (charValue <32);
+        passwordField.value += String.fromCharCode(charValue)
+    }
+    IsOk(passwordField)
+}
+
+function IsOk(e){
+    console.log(e);
+    console.log(e.value);
+    e.style.background = null
+    if(e.value ===""){
+        e.style.background = "red"
+    }
+    if(e.id ==="password" && e.value.length <8){
+        e.placeholder = "La contraseña debe ser de mas de 8 caracteres"
+    }
 }
 
 

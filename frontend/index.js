@@ -99,6 +99,41 @@ async function deleteCategory(id) {
     await getCategories()
 }
 
+function filtrar(){
+    //primero filtramos por categorias
+    let tablaCategoryData = document.querySelectorAll(".table__categories tr")
+    //para quitarnos el primero
+    let cabecera = false
+    tablaCategoryData.forEach(element => {
+        //Que no sea una X ni el primero
+        if(element.value !== "❌" && cabecera){
+            if( !element.innerHTML.includes(filtro.value)){
+                element.style.display = "none"
+            }else{
+                element.style.display = null
+            }
+        }else{
+            cabecera = true
+        }
+    })
+    //Ahora filtramos por paginas
+    let tablaSitesData = document.querySelectorAll(".table__sites tr")
+    //Vamos a quitarnos el primer
+    let primero = false
+    tablaSitesData.forEach(element => {
+        if(element.value !== "❌" && primero){
+            if( !element.innerHTML.includes(filtro.value)){
+                element.style.display = "none"
+            }else{
+                element.style.display = null
+            }
+        }else{
+            primero = true
+        }
+    })
+    
+}
+
 getCategories()
 getSites(1)
 

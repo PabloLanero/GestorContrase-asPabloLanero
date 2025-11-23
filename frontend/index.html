@@ -19,13 +19,16 @@
     </header> -->
   <main>
     <div>
+      <form action="">
         <button onclick="postCategories()" >Add categories</button>
-        <input type="text" id="new__category" placeholder="New category"/>
+        <input type="text" id="new__category" placeholder="New category" required/>
         <br/>
+      </form>
         <a href="./addSite.html" id="addSite"><button>Add site</button></a>
     </div>
     <div class="div__principal">
         <div>
+            <input type="text" id="filtro" placeholder="Filtar " onkeyup="filtrar()" style="width:300px;"><br/>
             <table class="table__categories">
                 <tr>
                     <th>Categories</th>
@@ -33,6 +36,7 @@
             </table>
         </div>
         <div >
+            
             <table class="table__sites">
                 <tr>
                     <th>Sitio</th>
