@@ -1,16 +1,52 @@
+class API {
+    constructor(URL, method) {
+        this.URL = URL
+        this.method = method
+        this.headers =  {
+            'Access-Control-Allow-Origin': '*',
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        }
+    }
+    doPost(body){
+        fetch(this.URL,{
+            method: this.method,
+            headers: this.headers,
+            body: JSON.stringify(body)
+        }).then(res => res.json())
+        .then(res =>{
+            return res
+        }) 
+    }
+    async doGet(){
+        return fetch(this.URL)
+        .then(res=>res.json())
+        .then(res => res)
+
+    }
+    
+    doDelete(){
+        fetch(this.URL, {
+        method: this.method,
+        headers: this.headers})
+    }
+}
+
+
 async function getCategories() {
     let tableCategories = document.getElementsByClassName("table__categories")[0]
     tableCategories.innerHTML = `
                 <tr>
                     <th>Categories</th>
                 </tr>`
-    await fetch("http://localhost:3000/categories")
-        .then(res => res.json())
-        .then((res) => {
+    
+            let api = new API("http://localhost:3000/categories","GET")
+            let resultados = await api.doGet()
+            console.log(resultados);
             
-            for(let i = 0; i < res.length; i++) {
+            for(let i = 0; i < resultados.length; i++) {
                 
-                const element = res[i];
+                const element = resultados[i];
                 // console.log(element);
                 if (element.name != null){
                     let tableRow = document.createElement("tr")
@@ -26,7 +62,7 @@ async function getCategories() {
                     // console.log(element);
                 }
             }
-})}
+}
 
 async function getSites(id) {
     let tableSites = document.getElementsByClassName("table__sites")[0]
@@ -39,9 +75,9 @@ async function getSites(id) {
                 </tr>`
 
     // console.log(tableSites);
-    await fetch("http://localhost:3000/sites")
-        .then(res => res.json())
-        .then((res) => {
+    let api = new API("http://localhost:3000/sites",'GET')
+    let res = await api.doGet()
+    
             
             for(let i = 0; i < res.length; i++) {
                 const element = res[i];
@@ -64,7 +100,7 @@ async function getSites(id) {
                 }
             }
 
-        })
+        
     let direccion = document.getElementById("addSite")
     direccion.href = `./addSite.html?category=${id}`
 }
@@ -73,30 +109,19 @@ async function postCategories(){
     let categoria = document.getElementById("new__category")
 
     const objetoBody = { name: categoria.value }
-    const res = await fetch('http://localhost:3000/categories', {
-        method: 'POST',
-        headers: {
-            'Access-Control-Allow-Origin': '*',
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-    },
-        body: JSON.stringify(objetoBody)
-    })
-    const data = await res.json()
+    let api = new API('http://localhost:3000/categories','POST')
+    await api.doPost(objetoBody)
+    
     console.log(data);
 
     await getCategories()
 }
 
 async function deleteCategory(id) {
-    const res = await fetch('http://localhost:3000/categories/'+id, {
-        method: 'DELETE',
-        headers: {
-            'Access-Control-Allow-Origin': '*',
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-    }})
-    await getCategories()
+    let api = new API('http://localhost:3000/categories/'+id,'DELETE')
+    await api.doDelete()
+    
+    await getCategories(1)
 }
 
 function filtrar(){

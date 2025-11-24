@@ -47,8 +47,10 @@ function CreatePassword(){
 }
 
 function IsOk(e){
+    
+    
     console.log(e);
-    console.log(e.value);
+    console.log(e.target);
     e.style.background = null
     if(e.value ===""){
         e.style.background = "red"
@@ -56,6 +58,10 @@ function IsOk(e){
     if(e.id ==="password" && e.value.length <8){
         e.placeholder = "La contraseña debe ser de mas de 8 caracteres"
     }
+    if(e.id ==="url" && !(e.value.includes("http"))){
+        e.placeholder = "Tiene que ser una url"
+    }
+
 }
 
 
