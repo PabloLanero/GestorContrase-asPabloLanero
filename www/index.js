@@ -54,6 +54,10 @@ async function getCategories() {
                     tableDataCategory.innerText = element.name
                     tableDataCategory.onclick = () => getSites(element.id) 
                     tableRow.appendChild(tableDataCategory)
+                    let tableDataIcon = document.createElement("td")
+                    tableDataIcon.innerText = String.fromCodePoint(element.icon)
+                    
+                    tableRow.appendChild(tableDataIcon)
                     let tableDataAction = document.createElement("td")
                     tableDataAction.innerText = "❌"
                     tableDataAction.onclick = () => deleteCategory(element.id)

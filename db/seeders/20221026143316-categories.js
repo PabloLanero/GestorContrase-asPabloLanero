@@ -1,6 +1,7 @@
 'use strict';
-
+let iconos = ["0x1F9F8","0x26a1","0x26d4","0x1F607","0x1F608","0x1F697","0x1F929","0x1F914"]
 const { faker } = require('@faker-js/faker');
+
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
@@ -17,6 +18,7 @@ module.exports = {
    let categories = Array(10).fill(0).map( (v,idx) => ({
     // id: idx,
     name: faker.company.bsNoun(),
+    icon: iconos[Math.round(Math.random()*iconos.length)],
     createdAt: new Date(),
     updatedAt: new Date(),
    }))
