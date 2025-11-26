@@ -12,8 +12,8 @@
         <input type="text" id="usuario" required placeholder="Usuario" onblur="IsOk(this)"/><br/>
         <input type="text" id="password" required placeholder="password" onblur="IsOk(this)"/> <button onclick="CreatePassword()">Crear contraseña</button><br/>
         <input type="text" id="url" required placeholder="url" onblur="IsOk(this)"/><br/>
-        <textarea id="description"></textarea><br/>
-        <button onclick="addSite()">Ejemplo</button>
+        <textarea id="description" onblur="IsOk(this)"></textarea><br/>
+        <button onclick="addSite()" type="button">Añadir Site</button>
     </form>
 </body>
 </html>
